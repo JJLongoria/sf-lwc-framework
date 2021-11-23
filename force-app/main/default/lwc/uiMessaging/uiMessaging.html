@@ -1,0 +1,14 @@
+<template>
+    <div class={type}>
+        <template if:true={title}>
+            <div class="title">{title}</div>
+        </template>
+        <template if:true={subtitle}>
+            <div class="subtitle">{subtitle}</div>
+        </template>
+        <template if:true={addSeparator}>
+            <div style="height: 15px"></div>
+        </template>
+        <div style={messageStyle}>{message}</div>
+    </div>
+</template>

@@ -1,0 +1,109 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <template if:true={loading}>
+        <lightning-layout>
+            <lightning-layout-item size="12">
+                <c-ui-spinner title={loadingTitle}></c-ui-spinner>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+    <template if:false={loading}>
+        <div class="slds-expression">
+            <h2 class="slds-expression__title">{title}</h2>
+            <div class="slds-expression__options">
+                <lightning-combobox name="logicOptions"
+                                    data-name="logicOptions"
+                                    label="Lógica"
+                                    value={logicValue}
+                                    placeholder="Selecciona una opción"
+                                    options={logicOptions}
+                                    onchange={handleChange}
+                                    disabled={disabled}></lightning-combobox>
+
+            </div>
+            <ul>
+                <template for:each={expressions}
+                          for:item="expression"
+                          for:index="index">
+                    <li class="slds-expression__row"
+                        key={expression.id}>
+                        <fieldset>
+                            <legend class="slds-expression__legend slds-align_absolute-center">
+                                <span>{expression.position}</span>
+                                <span class="slds-assistive-text">{expression.label}</span>
+                            </legend>
+                            <div class="slds-grid slds-gutters_xx-small">
+                                <div class="slds-col">
+                                    <c-ui-search-object-field-input name="field"
+                                                                    data-index={index}
+                                                                    placeholder="Selecciona un campo..."
+                                                                    label="Campo"
+                                                                    object-data={objectData}
+                                                                    object-api-name={objectApiName}
+                                                                    required="true"
+                                                                    message-when-value-missing="Debe seleccionar un campo"
+                                                                    values-text="Campos"
+                                                                    onselect={handleSelect}
+                                                                    onremove={handleRemove}
+                                                                    disabled={disabled}></c-ui-search-object-field-input>
+                                </div>
+                                <div class="slds-col slds-grow-none">
+                                    <c-ui-operator-selector-input name="operator"
+                                                                  data-index={index}
+                                                                  label="Operador"
+                                                                  value={expression.operator}
+                                                                  placeholder="Selecciona un operador..."
+                                                                  type={operatorsType}
+                                                                  onselect={handleSelect}
+                                                                  disabled={disabled}
+                                                                  required="true"
+                                                                  message-when-value-missing="Debe seleccionar un operador"></c-ui-operator-selector-input>
+                                </div>
+                                <div class="slds-col">
+                                    <lightning-input type="text"
+                                                     label="Valor"
+                                                     name="value"
+                                                     data-name="value"
+                                                     placeholder="Escriba un valor..."
+                                                     value={expression.value}></lightning-input>
+                                </div>
+                                <div class="slds-col slds-grow-none"
+                                     style="padding-top: 24px;">
+                                    <lightning-button-icon name="removeCondition"
+                                                           data-name="removeCondition"
+                                                           data-index={index}
+                                                           icon-name="utility:delete"
+                                                           variant="border-filled"
+                                                           alternative-text="Eliminar"
+                                                           title="Eliminar"
+                                                           onclick={handleClick}></lightning-button-icon>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </li>
+                </template>
+            </ul>
+            <template if:true={customLogic}>
+                <div class="slds-expression__custom-logic">
+                    <lightning-helptext content="Los operadores deben ser AND u OR (no discrimina mayusculas de minúsculas). Se pueden usar paréntesis para dar prioridad. Ejemplo: 1 AND 2 AND (3 OR 4) AND (5 AND (6 OR 7))"></lightning-helptext>
+                    <lightning-input type="text"
+                                     name="customLogicInput"
+                                     data-name="customLogicInput"
+                                     label="Lógica Personalizada"
+                                     placeholder="Ejemplo: 1 AND 2 AND (3 OR 4) AND (5 AND (6 OR 7))"
+                                     value={customLogicValue}
+                                     required={customLogic}
+                                     message-when-value-missing="Debe insertar una condición personalizada"></lightning-input>
+                </div>
+            </template>
+            <div class="slds-expression__buttons">
+                <lightning-button name="addCondition"
+                                  data-name="addCondition"
+                                  label="Añadir Condición"
+                                  title="Añadir Condición"
+                                  icon-name="utility:add"
+                                  onclick={handleClick}></lightning-button>
+            </div>
+        </div>
+    </template>
+</template>

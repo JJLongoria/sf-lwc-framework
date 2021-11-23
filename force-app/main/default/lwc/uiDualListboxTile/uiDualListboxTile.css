@@ -1,0 +1,13 @@
+.container {
+    vertical-align: middle;
+    border: 1px solid;
+    border-color: rgb(221, 219, 218);
+    padding: 2px 2px 0px 2px;
+    border-radius: 4px;
+    width: 100%;
+    min-height: 32px;
+    margin-right: 20px;
+    max-height: 500px;
+    min-height: 96px;
+    overflow-y: scroll;
+}

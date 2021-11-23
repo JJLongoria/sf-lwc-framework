@@ -1,0 +1,115 @@
+<template>
+    <template if:true={standard}>
+        <div class="tile">
+            <article class="slds-tile slds-hint-parent">
+                <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+                    <h3 class="slds-tile__title slds-truncate"
+                        title={label}>
+                        <a onclick={handleClick}>{label}</a>
+                    </h3>
+                    <template if:true={actions}>
+                        <div class="slds-shrink-none">
+                            <lightning-button-menu alternative-text={actionsTitle}
+                                                   variant="border-filled"
+                                                   menu-alignment="auto"
+                                                   icon-name={actionsIcon}
+                                                   onselect={handleActionClick}>
+                                <template for:each={actions}
+                                          for:item="action">
+                                    <lightning-menu-item key={action.name}
+                                                         data-name="action.name"
+                                                         value={action.name}
+                                                         label={action.label}
+                                                         disabled={action.disabled}
+                                                         checked={action.checked}
+                                                         prefix-icon-name={action.prefixIcon}
+                                                         icon-name={action.icon}>
+                                    </lightning-menu-item>
+                                </template>
+                            </lightning-button-menu>
+                        </div>
+                    </template>
+                </div>
+                <template if:true={detail}>
+                    <div class="slds-tile__detail">
+                        <template if:true={detail.text}>
+                            <p class="slds-truncate"
+                               title={detail.text}>{detail.text}</p>
+                        </template>
+                        <template if:true={detail.fields}>
+                            <template for:each={detail.fields}
+                                      for:item="field">
+                                <dl class="slds-list_horizontal slds-wrap"
+                                    key={field.label}>
+                                    <dt class="slds-item_label slds-text-color_weak slds-truncate"
+                                        title={field.label}>{field.label}</dt>
+                                    <dd class="slds-item_detail slds-truncate"
+                                        title={field.value}>{field.value}</dd>
+                                </dl>
+                            </template>
+                        </template>
+                    </div>
+                </template>
+            </article>
+        </div>
+    </template>
+    <template if:false={standard}>
+        <div class="tile">
+            <article class="slds-tile slds-media">
+                <div class="slds-media__figure">
+                    <template if:true={icon}>
+                        <span class="slds-icon_container">
+                            <lightning-icon icon-name={icon}></lightning-icon>
+                        </span>
+                    </template>
+                    <template if:false={icon}>
+                        <template if:true={avatar}>
+                            <span class="slds-avatar slds-avatar_circle slds-avatar_medium">
+                                <img src={avatar} />
+                            </span>
+                        </template>
+                    </template>
+                </div>
+                <div class="slds-media__body">
+                    <h3 class="slds-tile__title slds-truncate"
+                        title={label}>
+                        <a onclick={handleClick}>{label}</a>
+                    </h3>
+                    <template if:true={actions}>
+                        <div class="slds-shrink-none">
+                            <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
+                                    aria-haspopup="true"
+                                    title={actionsTitle}>
+                                <svg class="slds-button__icon slds-button__icon_hint"
+                                     aria-hidden="true">
+                                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
+                                </svg>
+                                <span class="slds-assistive-text">{actionsTitle}</span>
+                            </button>
+                        </div>
+                    </template>
+                    <template if:true={detail}>
+                        <div class="slds-tile__detail">
+                            <template if:true={detail.text}>
+                                <p class="slds-truncate"
+                                   title={detail.text}>{detail.text}</p>
+                            </template>
+                            <template if:true={detail.fields}>
+                                <template for:each={detail.fields}
+                                          for:item="field">
+                                    <dl class="slds-list_horizontal slds-wrap"
+                                        key={field.label}>
+                                        <dt class="slds-item_label slds-text-color_weak slds-truncate"
+                                            title={field.label}>{field.label}</dt>
+                                        <dd class="slds-item_detail slds-truncate"
+                                            title={field.value}>{field.value}</dd>
+                                    </dl>
+                                </template>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </article>
+        </div>
+    </template>
+</template>

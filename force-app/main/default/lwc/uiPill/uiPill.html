@@ -1,0 +1,66 @@
+<template>
+    <span class={pillStyle}
+          role="option"
+          aria-selected="true">
+        <template if:false={error}>
+            <template if:true={iconName}>
+                <span class="slds-icon_container slds-pill__icon_container"
+                      title={iconAltText}>
+                    <lightning-icon icon-name={iconName}
+                                    alternative-text={iconAltText}></lightning-icon>
+                </span>
+            </template>
+            <template if:false={iconName}>
+                <template if:true={avatar}>
+                    <span class="slds-icon_container slds-pill__icon_container"
+                          title={avatarAltText}>
+                        <span class="slds-avatar slds-avatar_circle"
+                              title={avatarTitle}>
+                            <img alt={avatarAltText}
+                                 src={avatar}
+                                 title={avatarTitle} />
+                        </span>
+                    </span>
+                </template>
+            </template>
+        </template>
+        <template if:true={error}>
+            <span class="slds-icon_container"
+                  title="Error">
+                <svg class="slds-icon slds-icon-text-error"
+                     aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#error"></use>
+                </svg>
+                <span class="slds-assistive-text">{errorMessage}</span>
+            </span>
+        </template>
+        <template if:true={clickable}>
+            <a data-index={index}
+               data-name="link"
+               title={label}
+               onclick={handleClick}>
+                <span class="slds-pill__label"
+                      title={label}>{label}</span>
+            </a>
+        </template>
+        <template if:false={clickable}>
+            <span class="slds-pill__label"
+                  title={label}>{label}</span>
+        </template>
+        <template if:true={removable}>
+            <span class="slds-icon_container slds-pill__remove"
+                  title={removeTitle}>
+                <lightning-button-icon onclick={handleClick}
+                                       data-index={index}
+                                       data-name="remove"
+                                       data-value={name}
+                                       icon-name="utility:close"
+                                       alternative-text={removeTitle}
+                                       size="x-small"
+                                       variant="bare"
+                                       class="slds-button slds-button_icon slds-button_icon slds-pill__remove"
+                                       title={removeTitle}></lightning-button-icon>
+            </span>
+        </template>
+    </span>
+</template>

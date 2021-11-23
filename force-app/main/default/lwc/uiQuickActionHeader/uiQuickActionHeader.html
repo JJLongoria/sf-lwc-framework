@@ -1,0 +1,45 @@
+<template>
+    <header class="slds-modal__header">
+        <template if:false={resize}>
+            <h2 class="slds-modal__title slds-hyphenate slds-text-heading_medium">{title}</h2>
+        </template>
+        <template if:true={resize}>
+            <lightning-layout>
+                <lightning-layout-item size="1">
+
+                </lightning-layout-item>
+                <lightning-layout-item size="10">
+                    <h2 class="slds-modal__title slds-hyphenate slds-text-heading_medium">{title}</h2>
+                </lightning-layout-item>
+                <lightning-layout-item size="1"
+                                       class="slds-align_absolute-center">
+                    <lightning-button-menu alternative-text="Cambiar Tamaño"
+                                           variant="border-filled"
+                                           menu-alignment="right"
+                                           icon-name="utility:expand"
+                                           icon-size="large"
+                                           onselect={handleSelect}>
+                        <lightning-menu-item value="default"
+                                             label="Por Defecto"
+                                             prefix-icon-name="utility:expand_alt"></lightning-menu-item>
+                        <lightning-menu-item value="xx-small"
+                                             label="50%"
+                                             prefix-icon-name="utility:expand_alt"></lightning-menu-item>
+                        <lightning-menu-item value="x-small"
+                                             label="60%"
+                                             prefix-icon-name="utility:expand_alt"></lightning-menu-item>
+                        <lightning-menu-item value="small"
+                                             label="70%"
+                                             prefix-icon-name="utility:expand_alt"></lightning-menu-item>
+                        <lightning-menu-item value="medium"
+                                             label="80%"
+                                             prefix-icon-name="utility:expand_alt"></lightning-menu-item>
+                        <lightning-menu-item value="large"
+                                             label="90%"
+                                             prefix-icon-name="utility:expand_alt"></lightning-menu-item>
+                    </lightning-button-menu>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+    </header>
+</template>

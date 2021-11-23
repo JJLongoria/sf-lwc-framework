@@ -1,0 +1,92 @@
+<template>
+    <div>
+        <div class="slds-form-element">
+            <div class="slds-form-element__control">
+                <div class="slds-combobox_container">
+                    <label class="slds-form-element__label"
+                           for="text-input-id-1">
+                        <template if:true={required}>
+                            <abbr class="slds-required"
+                                  title="required">* </abbr>
+                        </template>
+                        {label}
+                    </label>
+                    <div id="box"
+                         class={boxClass}
+                         aria-expanded="true"
+                         aria-haspopup="listbox"
+                         role="combobox">
+                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                             role="none">
+                            <template if:true={isValueSelected}>
+                                <div id="lookup-pill"
+                                     class="slds-pill-container pillContainer">
+                                    <span class="slds-pill slds-pill_link pill">
+                                        <span class="slds-pill__icon_container">
+                                            <lightning-icon icon-name={iconName}
+                                                            alternative-text={objectApiName}></lightning-icon>
+                                        </span>
+                                        <a class="slds-pill__action slds-button_neutral"
+                                           title={selectedName}>
+                                            <span class="slds-pill__label">{selectedName}</span>
+                                        </a>
+                                        <template if:false={readOnly}>
+                                            <button onclick={handleRemovePill}
+                                                    class="slds-button slds-button_icon slds-button_icon slds-pill__remove"
+                                                    title="Remove">
+                                                <lightning-icon icon-name="utility:close"
+                                                                alternative-text="Eliminar"></lightning-icon>
+                                            </button>
+                                        </template>
+                                    </span>
+                                </div>
+                            </template>
+                            <template if:false={isValueSelected}>
+                                <div class="slds-p-top_none">
+                                    <lightning-input class={inputClass}
+                                                     type="search"
+                                                     id="input"
+                                                     data-id="input"
+                                                     value={searchTerm}
+                                                     onclick={handleClick}
+                                                     onblur={onBlur}
+                                                     onchange={onChange}
+                                                     variant="label-hidden"
+                                                     autocomplete="off"
+                                                     placeholder={placeholder}
+                                                     disabled={readOnly}>
+                                    </lightning-input>
+                                </div>
+                            </template>
+                        </div>
+                        <div id="listbox-id-1"
+                             class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid"
+                             role="listbox">
+                            <label class="slds-form-element__label slds-m-left_medium slds-m-bottom_x-small">{recordsResultLabel}</label>
+                            <ul class="slds-listbox slds-listbox_vertical"
+                                role="presentation">
+                                <template for:each={records}
+                                          for:item="record">
+                                    <li key={record.Id}
+                                        onclick={onSelect}
+                                        data-id={record.Id}
+                                        role="presentation"
+                                        data-name={record.Name}>
+                                        <span class="slds-lookup__item-action slds-lookup__item-action--label"
+                                              role="option">
+                                            <lightning-icon class="slds-icon slds-icon--small slds-icon-text-default"
+                                                            icon-name={iconName}
+                                                            alternative-text={objName}
+                                                            size="small"></lightning-icon>
+                                            <span class="slds-truncate">{record.Name}</span>
+                                        </span>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

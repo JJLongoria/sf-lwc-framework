@@ -1,0 +1,36 @@
+<template>
+    <template if:true={label}>
+        <label class="slds-form-element__label">{label}</label>
+    </template>
+    <div class="slds-pill-container pillContainer">
+        <ul class="slds-listbox slds-listbox_horizontal"
+            role="listbox"
+            aria-label={label}
+            aria-orientation="horizontal">
+            <template for:each={values}
+                      for:item="value"
+                      for:index="index">
+                <li class="slds-listbox-item"
+                    role="presentation"
+                    key={value.value}>
+                    <c-ui-pill name='pill'
+                               icon-name={value.iconName}
+                               icon-alt-text={value.iconAltText}
+                               avatar={value.avatar}
+                               avatar-title={value.avatarTitle}
+                               avatar-alt-text={value.avatarAltText}
+                               remove-title={value.removeTitle}
+                               clickable={value.clickable}
+                               removable={value.removable}
+                               error={value.error}
+                               error-message={value.errorMessage}
+                               label={value.label}
+                               value={value.value}
+                               index={index}
+                               onpillclick={handleClick}
+                               onremove={handleClick}></c-ui-pill>
+                </li>
+            </template>
+        </ul>
+    </div>
+</template>

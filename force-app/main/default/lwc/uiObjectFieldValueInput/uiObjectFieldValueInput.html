@@ -1,0 +1,151 @@
+<template>
+    <template if:true={isText}>
+        <lightning-input type="text"
+                         name="text"
+                         data-name="text"
+                         label={label}
+                         disabled={disabled}
+                         readonly={readonly}
+                         required={required}
+                         value={value}
+                         placeholder={placeholder}
+                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+    </template>
+    <template if:true={isTextArea}>
+        <lightning-textarea name="textArea"
+                            data-name="textArea"
+                            label={label}
+                            disabled={disabled}
+                            readonly={readonly}
+                            required={required}
+                            value={value}
+                            placeholder={placeholder}
+                            message-when-value-missing={messageWhenValueMissing}></lightning-textarea>
+    </template>
+    <template if:true={isDate}>
+        <lightning-input type="date"
+                         name="date"
+                         data-name="date"
+                         label={label}
+                         disabled={disabled}
+                         readonly={readonly}
+                         required={required}
+                         value={value}
+                         placeholder={placeholder}
+                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+    </template>
+    <template if:true={isTime}>
+        <lightning-input type="time"
+                         name="time"
+                         data-name="time"
+                         label={label}
+                         disabled={disabled}
+                         readonly={readonly}
+                         required={required}
+                         value={value}
+                         placeholder={placeholder}
+                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+    </template>
+    <template if:true={isEmail}>
+        <lightning-input type="email"
+                         name="email"
+                         data-name="email"
+                         label={label}
+                         disabled={disabled}
+                         readonly={readonly}
+                         required={required}
+                         value={value}
+                         placeholder={placeholder}
+                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+    </template>
+    <template if:true={isPhone}>
+        <lightning-input type="phone"
+                         name="phone"
+                         data-name="phone"
+                         label={label}
+                         disabled={disabled}
+                         readonly={readonly}
+                         required={required}
+                         value={value}
+                         placeholder={placeholder}
+                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+    </template>
+    <template if:true={isUrl}>
+        <lightning-input type="url"
+                         name="url"
+                         data-name="url"
+                         label={label}
+                         disabled={disabled}
+                         readonly={readonly}
+                         required={required}
+                         value={value}
+                         placeholder={placeholder}
+                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+    </template>
+    <template if:true={isNumber}>
+        <lightning-input type="number"
+                         name="number"
+                         data-name="number"
+                         label={label}
+                         disabled={disabled}
+                         readonly={readonly}
+                         required={required}
+                         value={value}
+                         step="1"
+                         placeholder={placeholder}
+                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+    </template>
+    <template if:true={isDouble}>
+        <lightning-input type="number"
+                         name="number"
+                         data-name="number"
+                         label={label}
+                         disabled={disabled}
+                         readonly={readonly}
+                         required={required}
+                         value={value}
+                         formatter="decimal"
+                         step="0.01"
+                         placeholder={placeholder}
+                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+    </template>
+    <template if:true={isCurrency}>
+        <lightning-input type="number"
+                         name="number"
+                         data-name="number"
+                         label={label}
+                         disabled={disabled}
+                         readonly={readonly}
+                         required={required}
+                         value={value}
+                         formatter="currency"
+                         step="0.01"
+                         placeholder={placeholder}
+                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+    </template>
+    <template if:true={isPercent}>
+        <lightning-input type="number"
+                         name="number"
+                         data-name="number"
+                         label={label}
+                         disabled={disabled}
+                         readonly={readonly}
+                         required={required}
+                         value={value}
+                         formatter="percent"
+                         step="0.01"
+                         placeholder={placeholder}
+                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+    </template>
+    <template if:true={isCheckbox}>
+        <lightning-input type="checkbox"
+                         name="checkbox"
+                         data-name="checkbox"
+                         label={label}
+                         disabled={disabled}
+                         readonly={readonly}
+                         required={required}
+                         value="checkbox"
+                         checked={value}></lightning-input>
+    </template>
+</template>

@@ -1,0 +1,30 @@
+<template>
+    <lightning-layout multiple-rows="true">
+        <lightning-layout-item size="12">
+            <div style="height:6rem;position:relative">
+                <div class="slds-spinner_container">
+                    <div role="status"
+                         class={style}>
+                        <template if:true={title}>
+                            <span class="slds-assistive-text">{title}</span>
+                        </template>
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </div>
+            </div>
+        </lightning-layout-item>
+        <template if:true={title}>
+            <lightning-layout-item size="12"
+                                   class="slds-align_absolute-center">
+                <p class="slds-text-heading_small">{title}</p>
+            </lightning-layout-item>
+        </template>
+        <template if:true={message}>
+            <lightning-layout-item size="12"
+                                   class="slds-align_absolute-center">
+                <p class="slds-text-title">{message}</p>
+            </lightning-layout-item>
+        </template>
+    </lightning-layout>
+</template>

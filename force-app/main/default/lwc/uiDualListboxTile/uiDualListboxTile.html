@@ -1,0 +1,129 @@
+<template>
+    <div class="slds-form-element">
+        <div class="slds-form-element__control">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="12">
+                    <template if:true={label}>
+                        <label class="slds-form-element__label slds-form-element__legend"
+                               style="padding-top: 8px;">{label}</label>
+                    </template>
+                    <template if:true={tooltip}>
+                        <div class="slds-form-element__icon">
+                            <lightning-helptext content={tooltip}></lightning-helptext>
+                        </div>
+                    </template>
+                </lightning-layout-item>
+                <lightning-layout-item size="5">
+                    <label class="slds-form-element__label">{sourceLabel}</label>
+                    <div class="slds-pill-container container">
+                        <ul class="slds-has-dividers_bottom-space">
+                            <template if:true={hasOptions}>
+                                <template for:each={options}
+                                          for:item="option">
+                                    <li key={option.id}
+                                        class="slds-item">
+                                        <c-ui-check-box-tile label={option.label}
+                                                             name="options"
+                                                             item-id={option.id}
+                                                             detail={option.detail}
+                                                             disabled={disabled}
+                                                             ontileclick={handleClick}
+                                                             ontilechange={handleChange}></c-ui-check-box-tile>
+                                    </li>
+                                </template>
+                            </template>
+                            <template if:false={hasOptions}>
+                                <template if:true={emptyOptionsText}>
+                                    <li class="slds-item">
+                                        <p title={emptyOptionsText}>{emptyOptionsText}</p>
+                                    </li>
+                                </template>
+                            </template>
+                        </ul>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="1">
+                    <lightning-layout horizontal-align="space"
+                                      multiple-rows="true">
+                        <lightning-layout-item size="12"
+                                               class="slds-align_absolute-center slds-m-top_large slds-m-bottom_x-large">
+                            <lightning-button-icon icon-name="utility:right"
+                                                   alternative-text="remove"
+                                                   title="Add"
+                                                   data-name="add"
+                                                   variant="container"
+                                                   disabled={disabled}
+                                                   onclick={handleClick}></lightning-button-icon>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12"
+                                               class="slds-align_absolute-center">
+                            <lightning-button-icon icon-name="utility:left"
+                                                   alternative-text="remove"
+                                                   title="Remove"
+                                                   data-name="remove"
+                                                   variant="container"
+                                                   disabled={disabled}
+                                                   onclick={handleClick}></lightning-button-icon>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+                <lightning-layout-item size="5">
+                    <label class="slds-form-element__label">{selectedLabel}</label>
+                    <div class="slds-pill-container container">
+                        <ul class="slds-has-dividers_bottom-space">
+                            <template if:true={hasValues}>
+                                <template for:each={values}
+                                          for:item="value">
+                                    <li key={value.id}
+                                        class="slds-item">
+                                        <c-ui-check-box-tile label={value.label}
+                                                             item-id={value.id}
+                                                             name="values"
+                                                             detail={value.detail}
+                                                             disabled={disabled}
+                                                             ontileclick={handleClick}
+                                                             ontilechange={handleChange}></c-ui-check-box-tile>
+                                    </li>
+                                </template>
+                            </template>
+                            <template if:false={hasValues}>
+                                <template if:true={emptyValuesText}>
+                                    <li class="slds-item">
+                                        <p title={emptyValuesText}>{emptyValuesText}</p>
+                                    </li>
+                                </template>
+                            </template>
+                        </ul>
+                    </div>
+                </lightning-layout-item>
+                <template if:true={order}>
+                    <lightning-layout-item size="1">
+                        <lightning-layout horizontal-align="space"
+                                          multiple-rows="true">
+                            <lightning-layout-item size="12"
+                                                   class="slds-align_absolute-center slds-m-top_large slds-m-bottom_x-large">
+                                <lightning-button-icon icon-name="utility:up"
+                                                       alternative-text="up"
+                                                       title="Up"
+                                                       data-name="up"
+                                                       variant="container"
+                                                       disabled={disabled}
+                                                       onclick={handleClick}></lightning-button-icon>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12"
+                                                   class="slds-align_absolute-center">
+                                <lightning-button-icon icon-name="utility:down"
+                                                       alternative-text="down"
+                                                       title="Down"
+                                                       data-name="down"
+                                                       variant="container"
+                                                       disabled={disabled}
+                                                       onclick={handleClick}></lightning-button-icon>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </div>
+    </div>
+</template>

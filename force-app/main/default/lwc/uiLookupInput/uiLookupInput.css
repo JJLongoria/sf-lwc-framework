@@ -1,0 +1,15 @@
+.pill{
+    width : 100%;
+}
+
+.pillContainer {
+    vertical-align: middle;
+    border: 1px solid;
+    border-color: rgb(221, 219, 218);
+    border-radius: 4px;
+    padding: 2px;
+}
+
+.slds-modal__content{
+    overflow: initial;
+}

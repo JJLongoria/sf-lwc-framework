@@ -1,0 +1,192 @@
+<template>
+    <div class="slds-form-element">
+        <div class="slds-form-element__control">
+            <div class="slds-combobox_container">
+                <label class="slds-form-element__label"
+                       for="text-input-id-1">
+                    <template if:true={required}>
+                        <abbr class="slds-required"
+                              title="required">* </abbr>
+                    </template>
+                    {label}
+                </label>
+                <div data-id="box"
+                     class={boxClass}
+                     aria-expanded="true"
+                     aria-haspopup="listbox"
+                     role="combobox">
+                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                         role="none">
+                        <template if:true={value}>
+                            <div id="lookup-pill"
+                                 class="slds-pill-container pillContainer">
+                                <span class="slds-pill slds-pill_link pill">
+                                    <template if:true={showIcons}>
+                                        <span class="slds-pill__icon_container">
+                                            <lightning-icon icon-name={value.iconName}></lightning-icon>
+                                        </span>
+                                    </template>
+                                    <a class="slds-pill__action slds-button_neutral"
+                                       title={selectedName}>
+                                        <template if:true={showApiNames}>
+                                            <span class="slds-pill__label">{value.value}</span>
+                                        </template>
+                                        <template if:false={showApiNames}>
+                                            <span class="slds-pill__label">{value.label}</span>
+                                        </template>
+                                    </a>
+                                    <template if:false={readOnly}>
+                                        <button onclick={handleRemovePill}
+                                                class="slds-button slds-button_icon slds-button_icon slds-pill__remove"
+                                                title="Remove">
+                                            <lightning-icon icon-name="utility:close"
+                                                            alternative-text="Eliminar"></lightning-icon>
+                                        </button>
+                                    </template>
+                                </span>
+                            </div>
+                        </template>
+                        <template if:false={value}>
+                            <template if:false={isValueSelected}>
+                                <div class="slds-p-top_none">
+                                    <lightning-input class={inputClass}
+                                                     type="search"
+                                                     id="input"
+                                                     data-id="input"
+                                                     data-name="input"
+                                                     value={searchTerm}
+                                                     onclick={handleClick}
+                                                     onblur={onBlur}
+                                                     onchange={onChange}
+                                                     variant="label-hidden"
+                                                     autocomplete="off"
+                                                     placeholder={placeholder}
+                                                     disabled={readOnly}>
+                                    </lightning-input>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                    <div id="elementList"
+                         data-id="elementList"
+                         class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid"
+                         role="listbox">
+                        <lightning-layout>
+                            <lightning-layout-item size="1"
+                                                   class="slds-align_absolute-center">
+                                <lightning-button-icon icon-name="utility:chevronleft"
+                                                       variant="bare"
+                                                       data-name="back"
+                                                       alternative-text="Atrás"
+                                                       onclick={handleClick}
+                                                       disabled={backButtonDisabled}></lightning-button-icon>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="11">
+                                <lightning-breadcrumbs class="breadcrum">
+                                    <template for:each={breadcrumbs}
+                                              for:item="bread"
+                                              for:index="index">
+                                        <template if:true={showApiNames}>
+                                            <lightning-breadcrumb key={bread.value}
+                                                                  data-name="bread"
+                                                                  data-value={bread.value}
+                                                                  data-index={index}
+                                                                  label={bread.value}
+                                                                  onclick={handleClick}>
+                                            </lightning-breadcrumb>
+                                        </template>
+                                        <template if:false={showApiNames}>
+                                            <lightning-breadcrumb key={bread.value}
+                                                                  data-name="bread"
+                                                                  data-value={bread.value}
+                                                                  data-index={index}
+                                                                  label={bread.label}
+                                                                  onclick={handleClick}>
+                                            </lightning-breadcrumb>
+                                        </template>
+                                    </template>
+                                </lightning-breadcrumbs>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <template if:false={valuesToShow}>
+                            <label class="slds-form-element__label slds-m-left_medium slds-m-bottom_x-small">No hay valores para mostrar</label>
+                        </template>
+                        <template if:true={valuesToShow}>
+                            <template if:true={selectedField}>
+                                <lightning-layout multiple-rows="true">
+                                    <lightning-layout-item size="12"
+                                                           class="slds-align_absolute-center">
+                                        <div class="slds-tile__detail detailBox">
+                                            <label class="slds-form-element__label slds-m-bottom_x-small" style="font-weight: bold;">Detalles</label>
+                                            <div style="width: 100%;" class="slds-align_absolute-center slds-m-bottom_small">
+                                                <lightning-icon icon-name={selectedValue.iconName} size="large"></lightning-icon>
+                                            </div>
+                                            <dl class="slds-list_horizontal slds-wrap">
+                                                <dt class="slds-item_label slds-text-color_weak slds-truncate">Label:</dt>
+                                                <dd class="slds-item_detail slds-truncate"
+                                                    title="Description for first label">{selectedField.label}</dd>
+                                                <dt class="slds-item_label slds-text-color_weak slds-truncate">API:</dt>
+                                                <dd class="slds-item_detail slds-truncate"
+                                                    title="Description for second label">{selectedField.apiName}</dd>
+                                                <dt class="slds-item_label slds-text-color_weak slds-truncate">Tipo:</dt>
+                                                <dd class="slds-item_detail slds-truncate"
+                                                    title="Description for second label">{selectedField.dataType}</dd>
+                                                <template if:true={selectedValue.relatedTo}>
+                                                    <dt class="slds-item_label slds-text-color_weak slds-truncate">Ref:</dt>
+                                                    <dd class="slds-item_detail slds-truncate"
+                                                        title="Description for second label">{selectedValue.relatedTo}</dd>
+                                                </template>
+                                            </dl>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12"
+                                                           class="slds-align_absolute-center">
+                                        <lightning-button label="Cancelar"
+                                                          title="Cancel"
+                                                          data-name="cancel"
+                                                          onclick={handleClick}></lightning-button>
+                                        <lightning-button label="Seleccionar"
+                                                          variant="brand"
+                                                          title="select"
+                                                          data-name="select"
+                                                          onclick={handleClick}
+                                                          class="slds-m-left_x-small"></lightning-button>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </template>
+                            <template if:false={selectedField}>
+                                <template if:true={loading}>
+                                    <c-ui-spinner message={loadingTitle}></c-ui-spinner>
+                                </template>
+                                <template if:false={loading}>
+                                    <ul class="slds-listbox slds-listbox_vertical"
+                                        role="presentation">
+                                        <template for:each={valuesToShow}
+                                                  for:item="val"
+                                                  for:index="index">
+                                            <li key={val.value}
+                                                onclick={onSelect}
+                                                data-id={val.value}
+                                                data-index={index}
+                                                role="presentation">
+                                                <span class="slds-lookup__item-action slds-lookup__item-action--label"
+                                                      role="option">
+                                                    <template if:false={showApiNames}>
+                                                        <span class="slds-truncate">{val.label}</span>
+                                                    </template>
+                                                    <template if:true={showApiNames}>
+                                                        <span class="slds-truncate">{val.labelApi}</span>
+                                                    </template>
+                                                </span>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </template>
+                            </template>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

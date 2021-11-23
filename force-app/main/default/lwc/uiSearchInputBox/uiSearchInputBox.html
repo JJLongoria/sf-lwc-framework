@@ -1,0 +1,36 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item size="6"
+                               padding="horizontal-small">
+            <c-ui-search-input name="filter"
+                               placeholder={inputPlaceholder}
+                               allow-select-all="true"
+                               label={inputLabel}
+                               icon-name={iconName}
+                               values-text={inputValuesText}
+                               clear-on-select="true"
+                               values={values}
+                               onselect={handleSelect}
+                               onselectall={handleSelect}></c-ui-search-input>
+        </lightning-layout-item>
+        <lightning-layout-item size="6"
+                               padding="horizontal-small">
+            <c-ui-pill-container name='pillContainer'
+                                 values={pills}
+                                 label={boxLabel}
+                                 onpillclick={handleClick}
+                                 onremove={handleClick}></c-ui-pill-container>
+            <label class="slds-form-element__label slds-float_right">
+                <lightning-button-icon icon-name="utility:close"
+                                       name="removeAll"
+                                       data-name="removeAll"
+                                       variant="border-filled"
+                                       alternative-text={removeAllTitle}
+                                       class="slds-m-left_xx-small"
+                                       title={removeAllTitle}
+                                       size="small"
+                                       onclick={handleClick}></lightning-button-icon>
+            </label>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

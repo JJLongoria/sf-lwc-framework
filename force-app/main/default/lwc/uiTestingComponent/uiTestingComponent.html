@@ -1,0 +1,21 @@
+<template>
+    <template if:true={recordId}>
+        <c-ui-quick-action-header name="header" title="Testing Component" resize="true" onresize={handleResize}></c-ui-quick-action-header>
+        <div class="slds-modal__content slds-p-around_medium">
+            <c-ui-expression-builder-input></c-ui-expression-builder-input>
+        </div>
+        <footer class="slds-modal__footer">
+            <lightning-button label="Cerrar"
+                              title="Cerrar"
+                              data-name="cancel"
+                              name="cancel"
+                              onclick={handleClick}></lightning-button>
+            <lightning-button label="Guardar"
+                              title="Guardar"
+                              data-name="save"
+                              name="save"
+                              onclick={handleClick}
+                              variant="brand"></lightning-button>
+        </footer>
+    </template>
+</template>
