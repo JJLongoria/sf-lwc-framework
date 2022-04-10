@@ -40,6 +40,7 @@
                                                                     label="Campo"
                                                                     object-data={objectData}
                                                                     object-api-name={objectApiName}
+                                                                    readonly={readonly}
                                                                     required="true"
                                                                     message-when-value-missing="Debe seleccionar un campo"
                                                                     values-text="Campos"
@@ -49,6 +50,7 @@
                                 </div>
                                 <div class="slds-col slds-grow-none">
                                     <c-ui-operator-selector-input name="operator"
+                                                                  data-name="operator"
                                                                   data-index={index}
                                                                   label="Operador"
                                                                   value={expression.operator}
@@ -56,16 +58,27 @@
                                                                   type={operatorsType}
                                                                   onselect={handleSelect}
                                                                   disabled={disabled}
+                                                                  readonly={readonly}
                                                                   required="true"
                                                                   message-when-value-missing="Debe seleccionar un operador"></c-ui-operator-selector-input>
                                 </div>
                                 <div class="slds-col">
-                                    <lightning-input type="text"
-                                                     label="Valor"
-                                                     name="value"
-                                                     data-name="value"
-                                                     placeholder="Escriba un valor..."
-                                                     value={expression.value}></lightning-input>
+                                    <template if:true={expression.fieldData}>
+                                        <c-ui-object-field-value-input label="Valor"
+                                                                       name="value"
+                                                                       data-name="value"
+                                                                       data-index={index}
+                                                                       placeholder="Introduce un valor..."
+                                                                       object-data={expression.fieldData.obj}
+                                                                       field-api-name={expression.fieldData.field}
+                                                                       readonly={readonly}
+                                                                       type={expression.fieldData.datatype}
+                                                                       disabled={disabled}
+                                                                       value={expression.value}></c-ui-object-field-value-input>
+                                    </template>
+                                    <template if:false={expression.fieldData}>
+                                        <p class="slds-text-title" style="margin-top: 30px;">Selecciona un campo para incluir un valor</p>
+                                    </template>
                                 </div>
                                 <div class="slds-col slds-grow-none"
                                      style="padding-top: 24px;">

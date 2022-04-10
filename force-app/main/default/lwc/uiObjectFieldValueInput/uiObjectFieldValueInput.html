@@ -9,7 +9,8 @@
                          required={required}
                          value={value}
                          placeholder={placeholder}
-                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+                         message-when-value-missing={messageWhenValueMissing}
+                         onchange={handleChange}></lightning-input>
     </template>
     <template if:true={isTextArea}>
         <lightning-textarea name="textArea"
@@ -20,7 +21,8 @@
                             required={required}
                             value={value}
                             placeholder={placeholder}
-                            message-when-value-missing={messageWhenValueMissing}></lightning-textarea>
+                            message-when-value-missing={messageWhenValueMissing}
+                            onchange={handleChange}></lightning-textarea>
     </template>
     <template if:true={isDate}>
         <lightning-input type="date"
@@ -32,7 +34,20 @@
                          required={required}
                          value={value}
                          placeholder={placeholder}
-                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+                         message-when-value-missing={messageWhenValueMissing}
+                         onchange={handleChange}></lightning-input>
+    </template>
+    <template if:true={isDatetime}>
+        <lightning-input type="datetime"
+                         name="datetime"
+                         data-name="datetime"
+                         disabled={disabled}
+                         readonly={readonly}
+                         required={required}
+                         value={value}
+                         placeholder={placeholder}
+                         message-when-value-missing={messageWhenValueMissing}
+                         onchange={handleChange}></lightning-input>
     </template>
     <template if:true={isTime}>
         <lightning-input type="time"
@@ -44,7 +59,8 @@
                          required={required}
                          value={value}
                          placeholder={placeholder}
-                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+                         message-when-value-missing={messageWhenValueMissing}
+                         onchange={handleChange}></lightning-input>
     </template>
     <template if:true={isEmail}>
         <lightning-input type="email"
@@ -56,7 +72,8 @@
                          required={required}
                          value={value}
                          placeholder={placeholder}
-                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+                         message-when-value-missing={messageWhenValueMissing}
+                         onchange={handleChange}></lightning-input>
     </template>
     <template if:true={isPhone}>
         <lightning-input type="phone"
@@ -68,7 +85,8 @@
                          required={required}
                          value={value}
                          placeholder={placeholder}
-                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+                         message-when-value-missing={messageWhenValueMissing}
+                         onchange={handleChange}></lightning-input>
     </template>
     <template if:true={isUrl}>
         <lightning-input type="url"
@@ -80,7 +98,8 @@
                          required={required}
                          value={value}
                          placeholder={placeholder}
-                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+                         message-when-value-missing={messageWhenValueMissing}
+                         onchange={handleChange}></lightning-input>
     </template>
     <template if:true={isNumber}>
         <lightning-input type="number"
@@ -93,7 +112,8 @@
                          value={value}
                          step="1"
                          placeholder={placeholder}
-                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+                         message-when-value-missing={messageWhenValueMissing}
+                         onchange={handleChange}></lightning-input>
     </template>
     <template if:true={isDouble}>
         <lightning-input type="number"
@@ -107,7 +127,8 @@
                          formatter="decimal"
                          step="0.01"
                          placeholder={placeholder}
-                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+                         message-when-value-missing={messageWhenValueMissing}
+                         onchange={handleChange}></lightning-input>
     </template>
     <template if:true={isCurrency}>
         <lightning-input type="number"
@@ -121,7 +142,8 @@
                          formatter="currency"
                          step="0.01"
                          placeholder={placeholder}
-                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+                         message-when-value-missing={messageWhenValueMissing}
+                         onchange={handleChange}></lightning-input>
     </template>
     <template if:true={isPercent}>
         <lightning-input type="number"
@@ -135,7 +157,8 @@
                          formatter="percent"
                          step="0.01"
                          placeholder={placeholder}
-                         message-when-value-missing={messageWhenValueMissing}></lightning-input>
+                         message-when-value-missing={messageWhenValueMissing}
+                         onchange={handleChange}></lightning-input>
     </template>
     <template if:true={isCheckbox}>
         <lightning-input type="checkbox"
@@ -146,6 +169,55 @@
                          readonly={readonly}
                          required={required}
                          value="checkbox"
-                         checked={value}></lightning-input>
+                         checked={value}
+                         onchange={handleChange}></lightning-input>
+    </template>
+    <template if:true={isPicklist}>
+        <lightning-combobox name="picklist"
+                            data-name="picklist"
+                            label={label}
+                            value={value}
+                            disabled={disabled}
+                            readonly={readonly}
+                            required={required}
+                            placeholder="Selecciona un Valor"
+                            options={options}
+                            message-when-value-missing={messageWhenValueMissing}
+                            onchange={handleChange}></lightning-combobox>
+    </template>
+    <template if:true={isMultiPicklist}>
+        <lightning-dual-listbox name="multipicklist"
+                                data-name="multipicklist"
+                                label={label}
+                                source-label="Opciones"
+                                selected-label="Selección"
+                                disabled={disabled}
+                                readonly={readonly}
+                                required={required}
+                                options={options}
+                                value={value}
+                                onchange={handleChange}
+                                message-when-value-missing={messageWhenValueMissing}></lightning-dual-listbox>
+    </template>
+    <template if:true={isLookup}>
+
+    </template>
+    <template if:true={islocation}>
+
+    </template>
+    <template if:true={isId}>
+
+    </template>
+    <template if:true={isEncryptedText}>
+
+    </template>
+    <template if:true={isDataCategoryReference}>
+
+    </template>
+    <template if:true={isAddress}>
+
+    </template>
+    <template if:true={isBase64}>
+
     </template>
 </template>

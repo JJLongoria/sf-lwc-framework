@@ -6,6 +6,7 @@ const NUMBER_TYPE = 'number';
 const DATE_TYPE = 'date';
 const ID_TYPE = 'id';
 const BOOLEAN_TYPE = 'bool';
+const PICKLIST_TYPE = 'picklist';
 
 const EQUALS_OPERATOR = '=';
 const IN_OPERATOR = 'in';
@@ -26,8 +27,6 @@ const DATE_OPERATORS = [
     { label: 'Mayor o Igual que', value: GREATER_THAN_OR_EQUALS_OPERATOR },
     { label: 'Menor que', value: LESS_THAN_OPERATOR },
     { label: 'Menor o Igual que', value: LESS_THAN_OR_EQUALS_OPERATOR },
-    { label: 'En el conjunto', value: IN_OPERATOR },
-    { label: 'Fuera del conjunto', value: NOT_IN_OPERATOR },
 ];
 
 const TEXT_OPERATORS = [
@@ -40,6 +39,16 @@ const TEXT_OPERATORS = [
     { label: 'Anterior o Igual que', value: LESS_THAN_OR_EQUALS_OPERATOR },
     { label: 'Posterior que', value: GREATER_THAN_OPERATOR },
     { label: 'Posterior o Igual que', value: GREATER_THAN_OR_EQUALS_OPERATOR },
+    { label: 'En el conjunto', value: IN_OPERATOR },
+    { label: 'Fuera del conjunto', value: NOT_IN_OPERATOR },    
+];
+
+const PICKLIST_OPERATORS = [
+    { label: 'Igual a', value: EQUALS_OPERATOR },
+    { label: 'Distinto de', value: NOT_EQUALS_OPERATOR },
+    { label: 'Contiene', value: CONTAINS_WITH_OPERATOR },
+    { label: 'Comienza Por', value: STARTS_WITH_OPERATOR },
+    { label: 'Termina Por', value: ENDS_WITH_OPERATOR },
     { label: 'En el conjunto', value: IN_OPERATOR },
     { label: 'Fuera del conjunto', value: NOT_IN_OPERATOR },    
 ];
@@ -77,6 +86,7 @@ OPERATORS_BY_TYPE[NUMBER_TYPE] = NUMBER_OPERATORS;
 OPERATORS_BY_TYPE[DATE_TYPE] = DATE_OPERATORS;
 OPERATORS_BY_TYPE[ID_TYPE] = ID_OPERATORS;
 OPERATORS_BY_TYPE[BOOLEAN_TYPE] = BOOLEAN_OPERATORS;
+OPERATORS_BY_TYPE[PICKLIST_TYPE] = PICKLIST_OPERATORS;
 
 export default class UiOperatorSelectorInput extends LightningElement {
 

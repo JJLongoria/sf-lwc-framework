@@ -21,6 +21,7 @@ const NUMBER_TYPE = 'number';
 const DATE_TYPE = 'date';
 const ID_TYPE = 'id';
 const BOOLEAN_TYPE = 'bool';
+const PICKLIST_TYPE = 'picklist';
 
 const OPERATORS_BY_DATATYPE = {
     'address': TEXT_TYPE,
@@ -38,10 +39,10 @@ const OPERATORS_BY_DATATYPE = {
     'integer': NUMBER_TYPE,
     'location': NUMBER_TYPE,
     'long': NUMBER_TYPE,
-    'multipicklist': TEXT_TYPE,
+    'multipicklist': PICKLIST_TYPE,
     'percent': NUMBER_TYPE,
     'phone': TEXT_TYPE,
-    'picklist': TEXT_TYPE,
+    'picklist': PICKLIST_TYPE,
     'reference': ID_TYPE,
     'string': TEXT_TYPE,
     'textarea': TEXT_TYPE,
@@ -70,6 +71,7 @@ export default class UiExpressionBuilderInput extends LightningElement {
     @track objectData;
     @track operatorsType = TEXT_TYPE;
     @track loading;
+    @track readonly;
 
     connectedCallback(){
         if (!this.objectData) {
@@ -106,7 +108,7 @@ export default class UiExpressionBuilderInput extends LightningElement {
                 label: 'Condición ' + (this.expressions.length + 1),
                 position: this.expressions.length + 1,
                 showLogicValue: this.expressions.length > 0,
-                field: undefined,
+                fieldData: undefined,
                 operator: undefined,
                 value: undefined,
                 datatype: undefined,
@@ -123,9 +125,9 @@ export default class UiExpressionBuilderInput extends LightningElement {
         const detail = EventManager.getEventDetail(event);
         const dataset = EventManager.getEventDataset(event);
         if(source === 'field'){
-            this.expressions[dataset.index].field = detail.value;
-            this.expressions[dataset.index].datatype = detail.data[detail.data.length - 1].datatype.toLowerCase();
-            this.operatorsType = OPERATORS_BY_DATATYPE[this.expressions[dataset.index].datatype];
+            console.log(detail.value);
+            this.expressions[dataset.index].fieldData = detail.value;
+            this.operatorsType = OPERATORS_BY_DATATYPE[this.expressions[dataset.index].fieldData.datatype];
         } else if(source === 'operator'){
             this.expressions[dataset.index].operator = detail.value;
         }
@@ -135,9 +137,9 @@ export default class UiExpressionBuilderInput extends LightningElement {
         console.log(this.name + ' handleRemove()');
         const source = EventManager.getSource(event);
         const detail = EventManager.getEventDetail(event);
+        const dataset = EventManager.getEventDataset(event);
         if(source === 'field'){
-            this.expressions[dataset.index].field = undefined;
-            this.expressions[dataset.index].datatype = undefined;
+            this.expressions[dataset.index].fieldData = undefined;
             this.operatorsType = OPERATORS_BY_DATATYPE[TEXT_TYPE];
         }
     }

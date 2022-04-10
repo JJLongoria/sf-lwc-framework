@@ -149,31 +149,30 @@ export default class UiSearchInputTree extends LightningElement {
             }
         } else if (source == 'select') {
             this.selectedFieldsDeep.push({
-                obj: this.actualObject.apiName,
+                obj: this.actualObject,
                 fromField: (this.selectedFieldsDeep.length > 0) ? this.selectedFieldsDeep[this.selectedFieldsDeep.length - 1].fieldToLower : undefined,
                 field: this.selectedField.apiName,
                 fieldToLower: this.selectedField.apiName.toLowerCase(),
                 relatedTo: this.selectedValue.relatedTo,
-                dataToAdd: this.selectedValue.value,
-                datatype: this.selectedField.dataType,
-                labelToAdd: this.selectedField.label,
+                value: this.selectedValue.value,
+                datatype: this.selectedField.dataType.toLowerCase(),
+                label: this.selectedField.label,
                 iconName: this.selectedValue.iconName
             });
             let index = 0;
             for (const selectedFieldData of this.selectedFieldsDeep) {
                 if (index == 0) {
-                    this._value = { value: selectedFieldData.dataToAdd, label: selectedFieldData.labelToAdd }
+                    this._value = { value: selectedFieldData.value, label: selectedFieldData.label }
                 } else {
-                    this._value.value += '.' + selectedFieldData.dataToAdd;
-                    this._value.label += ' > ' + selectedFieldData.labelToAdd;
+                    this._value.value += '.' + selectedFieldData.value;
+                    this._value.label += ' > ' + selectedFieldData.label;
                 }
                 this._value.iconName = selectedFieldData.iconName
                 index++;
             }
             this.checkRequired();
             const eventBuilder = EventManager.eventBuilder('select');
-            eventBuilder.addValue('value', this._value.label);
-            eventBuilder.addValue('data', this.selectedFieldsDeep);
+            eventBuilder.addValue('value', this.selectedFieldsDeep[this.selectedFieldsDeep.length - 1]);
             eventBuilder.setSource(this.name);
             EventManager.fire(this, eventBuilder.build());
             if (this.blurTimeout) {
@@ -335,9 +334,9 @@ export default class UiSearchInputTree extends LightningElement {
                             field: field.apiName,
                             fieldToLower: field.apiName.toLowerCase(),
                             relatedTo: this.selectedValue.relatedTo,
-                            dataToAdd: this.selectedValue.value,
-                            datatype: field.dataType,
-                            labelToAdd: field.label,
+                            value: this.selectedValue.value,
+                            datatype: field.dataType.toLowerCase(),
+                            label: field.label,
                             iconName: this.selectedValue.iconName
                         });
                         this.backButtonDisabled = this.breadcrumbs.length <= 1;
@@ -360,9 +359,9 @@ export default class UiSearchInputTree extends LightningElement {
                         field: field.apiName,
                         fieldToLower: field.apiName.toLowerCase(),
                         relatedTo: this.selectedValue.relatedTo,
-                        dataToAdd: this.selectedValue.value,
-                        datatype: field.dataType,
-                        labelToAdd: field.label,
+                        value: this.selectedValue.value,
+                        datatype: field.dataType.toLowerCase(),
+                        label: field.label,
                         iconName: this.selectedValue.iconName
                     });
                     this.backButtonDisabled = this.breadcrumbs.length <= 1;

@@ -32,10 +32,10 @@ public with sharing class SchemaUtils {
         }
     }
 
-    public static SObjectField getSObjectField(SObjectType objectType, String fieldAPIName) {
+    public static Schema.SObjectField getSObjectField(SObjectType objectType, String fieldAPIName) {
         Schema.DescribeSObjectResult describe = objectType.getDescribe();
-        Map<String, SObjectField> fields = describe.fields.getMap();
-        SObjectField field = fields.get(fieldAPIName.toLowerCase());
+        Map<String, Schema.SObjectField> fields = describe.fields.getMap();
+        Schema.SObjectField field = fields.get(fieldAPIName.toLowerCase());
         return field;
     }
 
@@ -77,7 +77,7 @@ public with sharing class SchemaUtils {
         try {
             Schema.sObjectType sObjType = Schema.getGlobalDescribe().get(objectApiName);
             List<Object> values = new List< Object>();
-            Schema.SObjectField sObjectField = getSObjectField(objectType, fieldApiName);
+            Schema.SObjectField sObjectField = getSObjectField(sObjType, fieldApiName);
             Schema.DescribeFieldResult fieldDescribe = sObjectField.getDescribe();
             List<Schema.PicklistEntry> picklistValues = fieldDescribe.getPicklistValues();
             for (Schema.PicklistEntry value : picklistValues) {

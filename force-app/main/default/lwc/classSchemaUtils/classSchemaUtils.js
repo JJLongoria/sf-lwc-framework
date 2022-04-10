@@ -1,7 +1,7 @@
 import { LightningElement } from 'lwc';
 import getSObjectInfo from '@salesforce/apex/SchemaUtils.describeSObjectLT';
 import getSObjectTypeFromId from '@salesforce/apex/SchemaUtils.getSObjectTypeFromIdLT';
-import getAllPicklistValuesDataMap from '@salesforce/apex/SchemaUtils.getPicklistValuesDataLT';
+import getAllPicklistValues from '@salesforce/apex/SchemaUtils.getPicklistValuesDataLT';
 import getDependantPicklistValuesMap from '@salesforce/apex/SchemaUtils.getDependentPicklistValuesMapLT';
 import getKeyPrefix from '@salesforce/apex/SchemaUtils.getKeyPrefixLT';
 
@@ -29,7 +29,7 @@ export default class SchemaUtils extends LightningElement {
      * @returns {Promise<Array<Object>>} Return an array promise with the picklist values. { label: xxxxx, value: xxxxx, default: true | false, active: true | false }
      */
     static getPicklistValues(objectApiName, fieldApiName){
-        return getAllPicklistValuesDataMap({objectApiName: objectApiName, fieldApiName: fieldApiName});
+        return getAllPicklistValues({objectApiName: objectApiName, fieldApiName: fieldApiName});
     }
 
     /**
